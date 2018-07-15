@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: aws-kotlin-jvm-spring # NOTE: update this with your service name
+service: aws-kotlin-jvm-spring-stack1 # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -20,8 +20,10 @@ service: aws-kotlin-jvm-spring # NOTE: update this with your service name
 provider:
   name: aws
   runtime: java8
+  stage: beta
+  region: eu-central-1
 
-  memorySize: 1024
+  memorySize: 256
   timeout: 30
 # you can overwrite defaults here
 #  stage: dev
@@ -65,6 +67,31 @@ functions:
           method: POST
     environment:
       FUNCTION_NAME: hello
+
+  time:
+    handler: com.serverless.handler.aws.TimeHandler
+    environment:
+      FUNCTION_NAME: time
+
+  timeApi:
+    handler: com.serverless.handler.aws.TimeHandler
+    events:
+      - http:
+          path: time
+          method: GET
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+    environment:
+      FUNCTION_NAME: time
+
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

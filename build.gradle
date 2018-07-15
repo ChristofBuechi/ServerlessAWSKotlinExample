@@ -51,7 +51,7 @@ ext {
     springCloudVersion = 'Finchley.RELEASE'
     awsLambdaEventsVersion = "2.2.2"
     awsLambdaCoreVersion = "1.2.0"
-    awsLambdaLog4jVersion = "1.2.0"
+    awsLambdaLog4jVersion = "1.1.0"
 }
 
 jar {
@@ -89,8 +89,6 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:2.9.5"
 
     compile "org.springframework.cloud:spring-cloud-function-adapter-aws"
-	compile "org.springframework.boot:spring-boot-starter-data-jpa"
-
 
 	compile "com.amazonaws:aws-lambda-java-events:${awsLambdaEventsVersion}"
     compile "com.amazonaws:aws-lambda-java-core:${awsLambdaCoreVersion}"
